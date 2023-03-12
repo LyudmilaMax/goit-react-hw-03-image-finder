@@ -40,8 +40,7 @@ export default class ImageGallery extends Component {
         })
         .catch(error => {
           this.setState({ status: 'error', error });
-        })
-        .finally(() => this.setState({ loading: false }));
+        });
     }
   }
 
@@ -57,7 +56,9 @@ export default class ImageGallery extends Component {
     }
 
     if (status === 'error') {
-      return <Text>The entered value "{this.props.keyword}" was not found</Text>;
+      return (
+        <Text>The entered value "{this.props.keyword}" was not found</Text>
+      );
     }
 
     if (status === 'success' || status === 'loading') {
@@ -73,8 +74,8 @@ export default class ImageGallery extends Component {
                   description={item.tags}
                 />
               ))}
-            {status === 'loading' && <Loader />}
           </ListGallery>
+          {status === 'loading' && <Loader />}
           {listImages.length !== 0 && !loadLastPage && (
             <ButtonLoadMore funcLoadMore={this.loadNextPage} />
           )}

@@ -14,8 +14,8 @@ export const ListGallery = styled.ul`
 `;
 
 export const Text = styled.p`
-font-weight: 600;
-font-size: 24px;
-text-align: center;
-color:rgba(214, 5, 5, 0.98);
-`
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: rgba(214, 5, 5, 0.98);
+`;

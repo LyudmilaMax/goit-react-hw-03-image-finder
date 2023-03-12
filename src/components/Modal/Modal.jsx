@@ -15,7 +15,6 @@ class Modal extends Component {
   }
 
   closeModalByEscape = evt => {
-
     if (evt.code === 'Escape') {
       this.props.onClose();
     }
