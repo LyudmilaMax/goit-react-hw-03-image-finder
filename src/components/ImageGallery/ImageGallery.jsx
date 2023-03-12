@@ -18,13 +18,17 @@ export default class ImageGallery extends Component {
   componentDidUpdate(prevProps, prevState) {
     const prevKeyword = prevProps.keyword;
     const nextKeyword = this.props.keyword;
-    const page = this.state.page;
+    let page = this.state.page;
     const per_page = 12;
 
     if (prevKeyword !== nextKeyword) {
-      this.setState({ page: 1, listImages: [] });
+      page = 1;
+      this.setState({ page, listImages: [] });
     }
-    if (prevKeyword !== nextKeyword || prevState.page !== page) {
+    if (
+      prevKeyword !== nextKeyword ||
+      (prevState.page !== page && page !== 1)
+    ) {
       this.setState({ status: 'loading' });
 
       ImagesApi(nextKeyword, page, per_page)
@@ -76,7 +80,7 @@ export default class ImageGallery extends Component {
               ))}
           </ListGallery>
           {status === 'loading' && <Loader />}
-          {listImages.length !== 0 && !loadLastPage && (
+          {listImages.length !== 0 && status !== 'loading' && !loadLastPage && (
             <ButtonLoadMore funcLoadMore={this.loadNextPage} />
           )}
         </>
